@@ -5,6 +5,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/google/uuid"
+	"log"
 	"time"
 )
 
@@ -22,7 +23,8 @@ func (p *PostgreSQL) SaveUser(ctx context.Context, user *models.User) error {
 	)
 
 	if err != nil {
-		return fmt.Errorf("op: %v, error: %v", op, err)
+		log.Printf("error with saving user in %v", err)
+		return fmt.Errorf("метод: %v, error: %v", op, err)
 	}
 
 	return nil

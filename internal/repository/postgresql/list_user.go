@@ -3,7 +3,7 @@ package postgresql
 import (
 	"awesomeProject/internal/domain/models"
 	"context"
-	"fmt"
+	"log"
 )
 
 func (p *PostgreSQL) ListUsersPostgreSQL(
@@ -24,7 +24,7 @@ func (p *PostgreSQL) ListUsersPostgreSQL(
 
 	rows, err := p.Db.QueryContext(ctx, query, minAge, maxAge, startDate, endDate)
 	if err != nil {
-		return nil, fmt.Errorf("op: %s, %w", op, err)
+		log.Printf("error with querying users in %s: %v", op, err)
 	}
 	defer rows.Close()
 
@@ -39,7 +39,8 @@ func (p *PostgreSQL) ListUsersPostgreSQL(
 			&user.RecordingDate,
 		)
 		if err != nil {
-			return nil, fmt.Errorf("op: %s, %w", op, err)
+			log.Printf("error with scanning user in %s: %v", op, err)
+			continue //иначе при ошибке все равно продолжит работать
 		}
 		users = append(users, user)
 	}

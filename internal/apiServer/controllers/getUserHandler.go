@@ -18,9 +18,9 @@ type GetUserResponse struct {
 }
 
 type GetUserParams struct {
-	firstName string
-	lastName  string
-	age       *int
+	first_name string
+	last_name  string
+	age        *int
 }
 
 func (h *Handler) GetUserHandler(w http.ResponseWriter, r *http.Request) {
@@ -31,8 +31,8 @@ func (h *Handler) GetUserHandler(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
 	var params GetUserParams
 
-	params.firstName = strings.TrimSpace(query.Get("first_name"))
-	params.lastName = strings.TrimSpace(query.Get("last_name"))
+	params.first_name = strings.TrimSpace(query.Get("first_name"))
+	params.last_name = strings.TrimSpace(query.Get("last_name"))
 	if ageStr := query.Get("age"); ageStr != "" {
 		age, err := strconv.Atoi(ageStr)
 		if err != nil {
@@ -54,7 +54,7 @@ func (h *Handler) GetUserHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	users, err := h.UserService.GetUser(ctx, params.firstName, params.lastName, *params.age)
+	users, err := h.UserService.GetUser(ctx, params.first_name, params.last_name, *params.age)
 	if err != nil {
 		h.Log.Error("ошибка при получении пользователей",
 			zap.String("op", op),
@@ -71,12 +71,12 @@ func (h *Handler) GetUserHandler(w http.ResponseWriter, r *http.Request) {
 func ValidateGetUserParams(params GetUserParams) error {
 	var validationErrors []string
 
-	if params.firstName == "" {
+	if params.first_name == "" {
 		validationErrors = append(validationErrors, "укажите имя")
 	}
 
-	if params.lastName == "" {
-		validationErrors = append(validationErrors, "фамилию напиши - не ленись")
+	if params.last_name == "" {
+		validationErrors = append(validationErrors, "укажите фамилию")
 	}
 
 	if params.age != nil {

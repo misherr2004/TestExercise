@@ -77,18 +77,18 @@ func Validation(req Request) error {
 
 	firstName := strings.TrimSpace(req.User.FirstName)
 	if firstName == "" {
-		validationErrors = append(validationErrors, "имя своё назови")
+		validationErrors = append(validationErrors, "укажите имя")
 	}
 
 	lastName := strings.TrimSpace(req.User.LastName)
 	if lastName == "" {
-		validationErrors = append(validationErrors, "а фамилию?")
+		validationErrors = append(validationErrors, "укажите фаилию")
 	}
 
 	if req.User.Age <= 0 {
-		validationErrors = append(validationErrors, "ты чё, не родился еще?")
+		validationErrors = append(validationErrors, "укажите ваш возраст")
 	} else if req.User.Age > 120 {
-		validationErrors = append(validationErrors, "слишком старый")
+		validationErrors = append(validationErrors, "неверный возраст")
 	}
 
 	if len(validationErrors) > 0 {

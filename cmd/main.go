@@ -6,7 +6,6 @@ import (
 	"awesomeProject/internal/repository/postgresql"
 	"awesomeProject/internal/userservice"
 	"awesomeProject/logger"
-	"fmt"
 )
 
 func main() {
@@ -14,10 +13,7 @@ func main() {
 
 	log := logger.New()
 
-	db, err := postgresql.NewPostgreSQL(cfg, log)
-	if err != nil {
-		fmt.Println("проблема с соединения с бд", err)
-	}
+	db, _ := postgresql.NewPostgreSQL(cfg, log)
 
 	userService := userservice.NewUserService(db, log)
 

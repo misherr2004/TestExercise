@@ -3,6 +3,7 @@ package controllers
 import (
 	"awesomeProject/internal/userservice"
 	"encoding/json"
+	"log"
 	"net/http"
 
 	"go.uber.org/zap"
@@ -21,6 +22,7 @@ func responseWithJson(w http.ResponseWriter, code int, payload interface{}) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(code)
 	if err := json.NewEncoder(w).Encode(payload); err != nil {
+		log.Printf("ошибка кодирования JSON: %v", err)
 		http.Error(w, "ошибка формирования ответа", http.StatusInternalServerError)
 	}
 }

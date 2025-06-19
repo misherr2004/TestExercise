@@ -4,15 +4,17 @@ import (
 	"awesomeProject/internal/domain/models"
 	"context"
 	"fmt"
+	"log"
 )
 
 func (u *UserService) SaveUser(ctx context.Context, user *models.User) error {
 	const op = "SaveUser"
 
 	if err := u.Db.SaveUser(ctx, user); err != nil {
-		return fmt.Errorf("метод: %s: %w", op, err)
+		log.Printf("error with saving user in %s: %v", op, err)
+		return fmt.Errorf("метод: %s, ошибка: %w", op, err)
 	}
-	u.Log.Info("User created")
+	log.Println("User created")
 
 	return nil
 }

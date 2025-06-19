@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+	"log"
 	"os"
 )
 
@@ -17,7 +18,8 @@ func InitLogger(cfg *LoggerConfig) (*zap.Logger, error) {
 
 	var level zapcore.Level
 	if err := level.UnmarshalText([]byte(cfg.Level)); err != nil {
-		return nil, err
+		log.Printf("error with unmarshaling in %s: %v", op, err)
+		return nil, fmt.Errorf("функция: %s, ошибка: %w", op, err)
 	}
 
 	encoderConfig := zapcore.EncoderConfig{
@@ -37,6 +39,7 @@ func InitLogger(cfg *LoggerConfig) (*zap.Logger, error) {
 
 	file, err := os.OpenFile("logs.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
+		log.Printf("error with opening file in %s: %v", op, err)
 		return nil, fmt.Errorf("функция %s: %w", op, err)
 	}
 
@@ -60,10 +63,14 @@ func InitLogger(cfg *LoggerConfig) (*zap.Logger, error) {
 }
 
 func New() *zap.Logger {
+	const op = "New"
 	cfg := &LoggerConfig{
 		Level:       "info",
 		OutputPaths: []string{"logs.txt", "stdout"},
 	}
-	logger, _ := InitLogger(cfg)
+	logger, err := InitLogger(cfg)
+	if err != nil {
+		log.Fatalf("error witn init logger in %s: %v", op, err)
+	}
 	return logger
 }

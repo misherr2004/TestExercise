@@ -6,7 +6,7 @@ import (
 	"awesomeProject/internal/userservice"
 	"context"
 	"errors"
-	"fmt"
+	"log"
 	"net/http"
 	"os"
 	"os/signal"
@@ -19,6 +19,7 @@ import (
 type Server struct {
 	router   *chi.Mux
 	handlers *controllers.Handler
+	log      *log.Logger
 }
 
 func NewServer(u userservice.IUserService, log *zap.Logger) *Server {
@@ -32,7 +33,7 @@ func NewServer(u userservice.IUserService, log *zap.Logger) *Server {
 
 func (s *Server) Run(cfg *config.Config) {
 	const op = "Run"
-	fmt.Println("Cервер запущен")
+	log.Println("Cервер запущен")
 	server := &http.Server{
 		Addr:         cfg.HTTPServer.Address,
 		Handler:      s.router,
@@ -44,23 +45,26 @@ func (s *Server) Run(cfg *config.Config) {
 	signal.Notify(stop, os.Interrupt)
 
 	go func() {
-		fmt.Println("Ожидание запросов")
+		log.Println("Ожидание запросов")
 		err := http.ListenAndServe(cfg.HTTPServer.Address, s.router)
 		if err != nil && !errors.Is(err, http.ErrServerClosed) {
-			fmt.Errorf("метод %v: %v", op, err)
+			log.Fatalf("error with starting server in %v: %v", op, err)
 		}
 	}()
 
 	<-stop
-	fmt.Println("Сервер выключается...")
+	log.Println("Сервер выключается...")
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	err := server.Shutdown(ctx)
 	if err != nil {
-		fmt.Errorf("метод %v: %v", op, err)
+		log.Printf("error with stopping server in %s: %v", op, err)
+
+	} else {
+		log.Println("Сервер завершен КОРРЕКТНО")
 	}
-	fmt.Println("Сервер завершен КОРРЕКТНО")
+
 }
 
 func (s *Server) Middleware(next http.Handler) http.Handler {
@@ -68,8 +72,7 @@ func (s *Server) Middleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		defer func() {
 			if err := recover(); err != nil {
-				//todo log / return
-				fmt.Errorf("метод %v: %v", op, err)
+				log.Printf("error with Middleware in %v: %v", op, err)
 				w.WriteHeader(http.StatusInternalServerError)
 				return
 			}
@@ -83,7 +86,7 @@ func (s *Server) setupRoutes() {
 	s.router.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		_, err := w.Write([]byte("Сервер работает")) //проверка работоспособности сервера
 		if err != nil {
-			fmt.Errorf("метод %v: %v", op, err)
+			log.Printf("error recording the response in %v: %v", op, err)
 		}
 	})
 

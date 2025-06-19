@@ -2,6 +2,7 @@ package postgresql
 
 import (
 	"fmt"
+	"log"
 )
 
 func (p *PostgreSQL) CreateTables() error {
@@ -19,7 +20,7 @@ func (p *PostgreSQL) CreateTables() error {
 
 	_, err := p.Db.Exec(query)
 	if err != nil {
-		return fmt.Errorf("метод %v: %v", op, err)
+		log.Printf("error with creating table in %s: %v", op, err)
 	}
 
 	p.Logger.Info("таблица СОЗДАНА!!!")

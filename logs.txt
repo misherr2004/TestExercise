@@ -84,3 +84,46 @@
 2025-06-18T01:06:07.414+0400	INFO	postgresql/migrations.go:9	начало миграций
 2025-06-18T01:06:07.415+0400	INFO	postgresql/migrations.go:25	таблица СОЗДАНА!!!
 2025-06-18T01:06:19.807+0400	INFO	userservice/usecases.go:15	User created
+2025-06-19T20:11:11.178+0300	INFO	postgresql/postgresql.go:47	успешный коннект с PostgreSQL
+2025-06-19T20:11:11.179+0300	INFO	postgresql/migrations.go:9	начало миграций
+2025-06-19T20:11:11.183+0300	INFO	postgresql/migrations.go:25	таблица СОЗДАНА!!!
+2025-06-19T20:16:40.767+0300	INFO	postgresql/postgresql.go:62	соединения с БД закрыто - УСПЕХ!!!
+2025-06-19T20:20:49.875+0300	INFO	postgresql/postgresql.go:50	успешный коннект с PostgreSQL
+2025-06-19T20:20:49.875+0300	INFO	postgresql/migrations.go:9	начало миграций
+2025-06-19T20:20:49.876+0300	INFO	postgresql/migrations.go:25	таблица СОЗДАНА!!!
+2025-06-19T20:20:58.009+0300	INFO	postgresql/postgresql.go:64	соединения с БД закрыто - УСПЕХ!!!
+2025-06-19T21:05:59.175+0300	INFO	postgresql/postgresql.go:46	успешный коннект с PostgreSQL
+2025-06-19T21:05:59.176+0300	INFO	postgresql/migrations.go:9	начало миграций
+2025-06-19T21:05:59.181+0300	INFO	postgresql/migrations.go:25	таблица СОЗДАНА!!!
+2025-06-19T21:31:01.693+0300	INFO	postgresql/postgresql.go:60	соединения с БД закрыто - УСПЕХ!!!
+2025-06-19T23:14:54.263+0300	INFO	postgresql/postgresql.go:47	успешный коннект с PostgreSQL
+2025-06-19T23:14:54.263+0300	INFO	postgresql/migrations.go:10	начало миграций
+2025-06-19T23:14:54.265+0300	INFO	postgresql/migrations.go:26	таблица СОЗДАНА!!!
+2025-06-19T23:15:08.015+0300	INFO	postgresql/postgresql.go:61	соединения с БД закрыто - УСПЕХ!!!
+2025-06-19T23:15:49.319+0300	INFO	postgresql/postgresql.go:47	успешный коннект с PostgreSQL
+2025-06-19T23:15:49.319+0300	INFO	postgresql/migrations.go:10	начало миграций
+2025-06-19T23:15:49.320+0300	INFO	postgresql/migrations.go:26	таблица СОЗДАНА!!!
+2025-06-19T23:22:56.353+0300	INFO	postgresql/postgresql.go:61	соединения с БД закрыто - УСПЕХ!!!
+2025-06-19T23:34:00.468+0300	INFO	postgresql/postgresql.go:47	успешный коннект с PostgreSQL
+2025-06-19T23:34:00.468+0300	INFO	postgresql/migrations.go:10	начало миграций
+2025-06-19T23:34:00.469+0300	INFO	postgresql/migrations.go:26	таблица СОЗДАНА!!!
+2025-06-19T23:34:02.915+0300	INFO	postgresql/postgresql.go:61	соединения с БД закрыто - УСПЕХ!!!
+2025-06-19T23:37:25.321+0300	INFO	postgresql/postgresql.go:47	успешный коннект с PostgreSQL
+2025-06-19T23:37:25.321+0300	INFO	postgresql/migrations.go:10	начало миграций
+2025-06-19T23:37:25.322+0300	INFO	postgresql/migrations.go:26	таблица СОЗДАНА!!!
+2025-06-19T23:37:36.655+0300	INFO	postgresql/postgresql.go:61	соединения с БД закрыто - УСПЕХ!!!
+2025-06-19T23:38:18.784+0300	INFO	postgresql/postgresql.go:47	успешный коннект с PostgreSQL
+2025-06-19T23:38:18.784+0300	INFO	postgresql/migrations.go:10	начало миграций
+2025-06-19T23:38:18.785+0300	INFO	postgresql/migrations.go:26	таблица СОЗДАНА!!!
+2025-06-19T23:42:36.268+0300	INFO	userservice/usecases.go:17	User created
+2025-06-19T23:43:57.601+0300	INFO	userservice/usecases.go:17	User created
+2025-06-19T23:44:24.103+0300	ERROR	controllers/saveUserHandler.go:45	валидация не пройдена	{"op": "Handler.SaveUserHandler", "error": "неверный возраст"}
+2025-06-19T23:44:35.587+0300	ERROR	controllers/saveUserHandler.go:45	валидация не пройдена	{"op": "Handler.SaveUserHandler", "error": "укажите имя"}
+2025-06-19T23:44:53.607+0300	ERROR	controllers/saveUserHandler.go:45	валидация не пройдена	{"op": "Handler.SaveUserHandler", "error": "укажите дату рождения"}
+2025-06-19T23:47:48.774+0300	ERROR	controllers/getUserHandler.go:50	валидация не пройдена	{"op": "Handler.GetUserHandler", "error": "укажите имя\nукажите фамилию"}
+2025-06-19T23:51:49.989+0300	ERROR	controllers/getUserHandler.go:50	валидация не пройдена	{"op": "Handler.GetUserHandler", "error": "укажите имя\nукажите фамилию"}
+2025-06-19T23:55:41.138+0300	INFO	postgresql/postgresql.go:61	соединения с БД закрыто - УСПЕХ!!!
+2025-06-19T23:58:28.064+0300	INFO	postgresql/postgresql.go:47	успешный коннект с PostgreSQL
+2025-06-19T23:58:28.065+0300	INFO	postgresql/migrations.go:10	начало миграций
+2025-06-19T23:58:28.068+0300	INFO	postgresql/migrations.go:26	таблица СОЗДАНА!!!
+2025-06-19T23:59:49.527+0300	INFO	postgresql/postgresql.go:61	соединения с БД закрыто - УСПЕХ!!!

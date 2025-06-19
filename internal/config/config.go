@@ -1,8 +1,8 @@
 package config
 
 import (
-	"fmt"
 	"github.com/ilyakaznacheev/cleanenv"
+	"log"
 	"os"
 	"time"
 )
@@ -19,14 +19,13 @@ func MustLoad() *Config {
 	configPath := "config/config.yaml"
 
 	if _, err := os.Stat(configPath); os.IsNotExist(err) {
-		//todo log / return
-		fmt.Errorf("функция %v: %v", op, err)
+		log.Fatalf("config file is not exist in %v: %v", op, err)
 		return nil
 	}
 
 	var cfg Config
 	if err := cleanenv.ReadConfig(configPath, &cfg); err != nil {
-		fmt.Errorf("функция %v: %v", op, err)
+		log.Fatalf("error with reading config in %v: %v", op, err)
 	}
 
 	return &cfg

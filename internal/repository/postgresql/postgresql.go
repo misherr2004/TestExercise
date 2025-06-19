@@ -6,9 +6,9 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-
 	_ "github.com/lib/pq"
 	"go.uber.org/zap"
+	"log"
 )
 
 type UserDB interface {
@@ -37,11 +37,11 @@ func NewPostgreSQL(cfg *config.Config, logger *zap.Logger) (*PostgreSQL, error) 
 
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
-		return nil, fmt.Errorf("функция %v: %v", op, err)
+		log.Fatalf("error with connection db in %s: %sv", op, err)
 	}
 
 	if err := db.Ping(); err != nil {
-		return nil, fmt.Errorf("функция %v: %v ", op, err)
+		log.Fatalf("error with ping in %s: %sv", op, err)
 	}
 
 	logger.Info("успешный коннект с PostgreSQL")
@@ -55,7 +55,6 @@ func NewPostgreSQL(cfg *config.Config, logger *zap.Logger) (*PostgreSQL, error) 
 func (p *PostgreSQL) Close() {
 	const op = "Close"
 	if err := p.Db.Close(); err != nil {
-		//todo log
 		p.Logger.Error("DB close error!!!",
 			zap.Error(fmt.Errorf("метод %v: %v", op, err)))
 	}
